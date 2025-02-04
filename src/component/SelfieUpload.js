@@ -57,7 +57,7 @@ function SelfieUpload() {
         e.preventDefault();
 
         try {
-            const response = await axios.get(`${process.env.url}/getuserdata`);
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/getuserdata`);
 
             var { id, name } = response.data;
 
