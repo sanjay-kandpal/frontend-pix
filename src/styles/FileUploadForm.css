@@ -1,0 +1,125 @@
+
+.modal-body{
+	border: 1px solid black;
+	border-radius: 5px;
+	border-style: dashed;
+	width: 15%;
+	padding: 1.2em;
+	/* center a div */
+  	margin: 5% auto;
+}
+
+.modal-title{
+	font-size: 2.2rem;
+	border: 1px solid black;
+	padding: 1.2em;
+}
+
+.flex-file-previews{
+  	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+    justify-content: space-between;
+	border: 1px solid black;
+    gap: 1em;
+
+} 
+.file-preview{
+	margin: 1.2em;
+	border-radius: 5px;
+	width: 45%;
+	border: 1px solid black;
+}
+img{
+	/* width: 100%; */
+    height: auto;
+	border: 1px solid black;
+}
+
+.btn-primary{
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 12px;
+}
+
+
+.checkbox-wrapper-56,
+.checkbox-wrapper-56 *:before,
+.checkbox-wrapper-56 *:after {
+  box-sizing: border-box;
+}
+
+  .checkbox-wrapper-56 .container input {
+    opacity: 1;
+    -webkit-appearance: none;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    box-shadow: -10px -10px 15px rgba(255,255,255,0.5),
+    10px 10px 15px rgba(0,0,70,0.12);
+    border-radius: 50%;
+    border: 8px solid #ececec;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+  }
+
+  .checkbox-wrapper-56 .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .checkbox-wrapper-56 .container input::after {
+    transition: .5s;
+    font-family: monospace;
+    content: '';
+    color: #7a7a7a;
+    font-size: 25px;
+    left: 0.45em;
+    top: 0.25em;
+    width: 0.25em;
+    height: 0.5em;
+    border: solid #7a7a7a;
+    border-width: 0 0.15em 0.15em 0;
+    transform: rotate(45deg);
+  }
+
+  .checkbox-wrapper-56 .container input:checked {
+    box-shadow: -10px -10px 15px rgba(255,255,255,0.5),
+    10px 10px 15px rgba(70,70,70,0.12),
+    inset -10px -10px 15px rgba(255,255,255,0.5),
+    inset 10px 10px 15px rgba(70,70,70,0.12);
+    transition: .5s;
+  }
+
+  .checkbox-wrapper-56 .container input:checked::after {
+    transition: .5s;
+    border: solid #15e38a;
+    border-width: 0 0.15em 0.15em 0;
+    transform: rotate(45deg);
+  }
+
+
+
+  .file-drop-zone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  
+  .file-drop-zone.dragging {
+    border-color: #007bff;
+  }

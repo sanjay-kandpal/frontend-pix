@@ -1,0 +1,87 @@
+.DropzoneText {
+    margin: 0px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    margin: 25px;
+}
+
+.ImageContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.uploadButton {
+    align-self: end;
+    border-radius: 15px;
+    padding: 0.5rem 3rem;
+}
+
+.ImagePreview {
+    display: flex;
+    height: 100px;
+    border-radius: 2px;
+    margin-top: 15px;
+}
+
+.FileName {
+    display: flex;
+    font-size: 14px;
+    margin-top: 8px;
+    width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ListItem {
+    margin: 0px 20px;
+}
+
+.partyCodeDiv {
+    align-self: end;
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.copyIcon {
+    cursor: pointer;
+}
+
+@keyframes fadeKeyframe {
+    from {
+        transform: scale(1);
+        /* opacity: 0.5; */
+    }
+
+    to {
+        transform: scale(0.8);
+        /* opacity: ; */
+    }
+}
+
+.fadeanime {
+    animation: fadeKeyframe 100ms ease;
+}
+
+.titleInput {
+    margin: 0px 4rem;
+}
+
+.selfieInstructionsContainer {
+    height: 100vh;
+}
+
+.selfieInstructions {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.descListItem {
+    padding: .5rem;
+    font-size: 1.2rem;
+}

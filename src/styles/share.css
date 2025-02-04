@@ -1,0 +1,18 @@
+
+.share{
+    border: 1px solid black;
+    width: 100%;
+    display:  flex;
+    flex-direction: row;
+    position: relative;
+}
+.share-container{
+
+    width: 50%;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    /* height: 100vh; */
+    /* float: right; */
+    border: 1px solid black;
+}

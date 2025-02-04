@@ -1,0 +1,15 @@
+
+.dashboard {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.dashboard--content {
+  background: #fff;
+  flex: 1;
+  border-radius: 20px;
+  padding: 2rem;
+}
