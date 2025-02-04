@@ -19,7 +19,9 @@ const Sidebar = () => {
     const handleExit = async () => {
         console.log("Logout");
         try {
-            const response = await fetch(`${process.env.API_URL}/signout`, {
+            console.log(process.env.REACT_APP_API_URL);
+            
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/signout`, {
                 method: "POST",
                 credentials: "include", // Include cookies in the request
             });

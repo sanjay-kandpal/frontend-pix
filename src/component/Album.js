@@ -29,10 +29,10 @@ function Album() {
         const fetchData = async () => {
             setLoading(true)
             try {
-                const userDataResponse = await axios.get("http://localhost:8081/getUserData");
+                const userDataResponse = await axios.get(`${process.env.REACT_APP_API_URL}/getUserData`);
                 const { id, name } = userDataResponse.data;
 
-                const imagesResponse = await axios.post('http://localhost:8081/getImageList', { partycode: partycode });
+                const imagesResponse = await axios.post(`${process.env.REACT_APP_API_URL}/getImageList`, { partycode: partycode });
                 const fetchedImages = imagesResponse.data.images;
 
                 setMatchImg(fetchedImages);

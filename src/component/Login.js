@@ -34,7 +34,7 @@ function Login() {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:8081/")
+			.get(`${process.env.REACT_APP_API_URL}`)
 			.then((res) => {
 				console.log(res);
 				
@@ -56,7 +56,7 @@ function Login() {
 		setErrors(Validation(values));
 		if (errors.email === "" && errors.password === "") {
 			axios
-				.post("http://localhost:8081/login", values)
+				.post(`${process.env.REACT_APP_API_URL}/login`, values)
 				.then((res) => {
 					console.log(res.data);
 					if (res.data.message === true) {

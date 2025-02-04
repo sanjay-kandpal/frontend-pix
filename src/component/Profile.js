@@ -17,7 +17,7 @@ function Profile() {
   const [passwordError, setPasswordError] = useState('');
 
   useEffect(() => {
-    axios.get(`http://localhost:8081/user?id=${localStorage.getItem('id')}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/user?id=${localStorage.getItem('id')}`)
       .then((res) => {
         console.log(res);
         setName(res.data.name);
@@ -56,7 +56,7 @@ function Profile() {
     }
 
     try {
-      const response = await fetch(`http://localhost:8081/update?id=${localStorage.getItem('id')}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/update?id=${localStorage.getItem('id')}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

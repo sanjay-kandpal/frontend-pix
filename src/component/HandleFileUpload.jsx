@@ -9,7 +9,7 @@ const handleFileUpload = () => {
   const handleFileUpload = async (formData) => {
     try {
       // Make a POST request to your server with the formData
-      const response = await fetch("http://localhost:8081/upload", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/upload`, {
         method: "POST",
         body: formData,
       });

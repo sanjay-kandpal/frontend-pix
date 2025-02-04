@@ -24,7 +24,7 @@ function Home() {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:8081/")
+			.get(`${process.env.REACT_APP_API_URL}`)
 			.then((res) => {
 				console.log(res.data);
 				if (res.data.valid === true) {
@@ -63,30 +63,6 @@ function Home() {
 
 	const addPartyCode = async () => {
 
-		// try {
-		// 	const response = await fetch(`https://38sglfeq52.execute-api.us-east-1.amazonaws.com/prod/compareFaces`, {
-		// 	// const response = await fetch(`https://38sglfeq52.execute-api.us-east-1.amazonaws.com/prod/compareFaces?userid=2&partycode=0RQN1`, {
-		// 	  method: 'POST',
-		// 		mode: 'no-cors',
-		// 	  headers: {
-		// 		'Content-Type': 'application/json',
-		// 		'Access-Control-Allow-Origin': '*',
-		// 	  },
-		// 	//   body: JSON.stringify({ 
-		// 	  body:  {
-		// 		userid: userId,
-		// 		partycode: partyCode
-		// 	  }
-		// 	//    })
-		// 	});
-
-		// 	const data = await response;
-		// 	// res.json(data);
-		// 	console.log(response)
-		//   } catch (error) {
-		// 	console.error('Error:', error);
-		// 	// res.status(500).json({ error: 'Internal Server Error' });
-		//   }
 
 		setLoading(true)
 
@@ -94,7 +70,7 @@ function Home() {
 			const uploadData = {
 				partyCode,
 			};
-			const response = await fetch('http://localhost:8081/addPartcodeForUser', {
+			const response = await fetch(`${process.env.REACT_APP_API_URL}/addPartcodeForUser`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

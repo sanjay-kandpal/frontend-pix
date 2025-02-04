@@ -6,7 +6,7 @@ import AuthMiddleware from './AuthMiddleware';
 
 const Share = () => {
   // Replace 'yourShareUrl' with the URL you want to share
-  const shareUrl = `${process.env.API_URL}/share`;
+  const shareUrl = `${process.env.REACT_APP_API_URL}/share`;
   const sessionID = Cookies.get('session');
   console.log(sessionID);
   AuthMiddleware();
