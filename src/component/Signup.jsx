@@ -22,7 +22,7 @@ function Signup() {
         event.preventDefault();
         setErrors(Validation(values));
         if (errors.name === "" && errors.email === "" && errors.password === "") {
-            axios.post(`${process.env.API_URL}/signup`, values)
+            axios.post(`${process.env.REACT_APP_API_URL}/signup`, values)
                 .then((res) => {
                     navigate('/selfImageUpload')
                     // console.log(res.data);
