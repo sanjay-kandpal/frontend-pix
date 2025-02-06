@@ -6,6 +6,8 @@ import AuthMiddleware from './AuthMiddleware';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import axiosInstance from '../utils/axios';
+
 function Profile() {
   AuthMiddleware();
   const { userData } = useUserData();
@@ -17,13 +19,12 @@ function Profile() {
   const [passwordError, setPasswordError] = useState('');
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/user?id=${localStorage.getItem('id')}`)
+    axiosInstance.get(`/user?id=${localStorage.getItem('id')}`)
       .then((res) => {
         console.log(res);
         setName(res.data.name);
         setEmail(res.data.email);
         setPassword(res.data.password)
-          // const key = "pixsort-12344321";
       })
       .catch((err) => console.error(err));
   }, []);
@@ -56,21 +57,17 @@ function Profile() {
     }
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/update?id=${localStorage.getItem('id')}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, password }),
+      const response = await axiosInstance.put(`/update?id=${localStorage.getItem('id')}`, {
+        name,
+        email,
+        password
       });
-      console.log(response);
-      if (response.ok) {
+
+      if (response.data.valid) {
         toast.success('Profile updated successfully');
-        console.log('User data updated successfully!');
-      } else {
-        console.error('Failed to update user data');
       }
     } catch (error) {
+      toast.error('Failed to update profile');
       console.error('Error:', error);
     }
   };

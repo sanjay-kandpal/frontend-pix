@@ -6,6 +6,7 @@ import AWS from 'aws-sdk';
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import Loader from "./Loader";
+import axiosInstance from "../utils/axios";
 
 const dropzoneStyle = {
     flex: 1,
@@ -57,7 +58,7 @@ function SelfieUpload() {
         e.preventDefault();
 
         try {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/getuserdata`);
+            const response = await axiosInstance.get('/getuserdata');
 
             var { id, name } = response.data;
 

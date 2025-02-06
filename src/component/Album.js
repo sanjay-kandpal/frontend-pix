@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import axios from "axios";
 import AWS from 'aws-sdk';
 import Sidebar from './Sidebar';
@@ -8,6 +8,7 @@ import download from "../images/download.svg"
 import JSZip from "jszip";
 import { saveAs } from 'file-saver';
 import Loader from './Loader';
+import axiosInstance from '../utils/axios';
 
 
 function Album() {
@@ -29,15 +30,18 @@ function Album() {
         const fetchData = async () => {
             setLoading(true)
             try {
-                const userDataResponse = await axios.get(`${process.env.REACT_APP_API_URL}/getUserData`);
+                const userDataResponse = await axiosInstance.get('/getUserData');
                 const { id, name } = userDataResponse.data;
 
-                const imagesResponse = await axios.post(`${process.env.REACT_APP_API_URL}/getImageList`, { partycode: partycode });
+                const imagesResponse = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/getImageList`, { partycode: partycode });
                 const fetchedImages = imagesResponse.data.images;
 
                 setMatchImg(fetchedImages);
             } catch (error) {
                 console.error('Error:', error.response ? error.response.data.error : error.message);
+                if (error.response?.status === 401) {
+                    Navigate('/login');
+                }
             }
 
             AWS.config.update({

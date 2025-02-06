@@ -1,18 +1,16 @@
-import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom'; // Adjust import based on react-router-dom version
+import { useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 
 const AuthMiddleware = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const sessionID = Cookies.get('session');
-    if (sessionID !== 'cookieValue') {
+    const token = localStorage.getItem('token');
+    if (!token) {
       navigate('/login');
     }
   }, [navigate]);
 
-  // If you don't need to render anything, return null
   return null;
 };
 

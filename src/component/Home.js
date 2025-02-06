@@ -7,7 +7,7 @@ import Content from "./Content";
 import "../App.css";
 import { BiSearch } from "react-icons/bi";
 import { toast } from 'react-toastify'
-
+import axiosInstance from '../utils/axios';
 
 function Home() {
 
@@ -23,26 +23,29 @@ function Home() {
 	axios.defaults.withCredentials = true;
 
 	useEffect(() => {
-		axios
-			.get(`${process.env.REACT_APP_API_URL}`)
+		const token = localStorage.getItem('token');
+		if (!token) {
+			navigate("/Login");
+			return;
+		}
+
+		axiosInstance.get('/')
 			.then((res) => {
-				console.log(res.data);
 				if (res.data.valid === true) {
 					setName(res.data.username);
-					setUserId(res.data.cookie.userid);
+					setUserId(res.data.userId);
 					setAuthentic(true);
-					
-					setCodes(res.data.userCodes)
+					setCodes(res.data.userCodes);
 				} else {
-						
 					navigate("/Login");
 				}
 			})
 			.catch((err) => {
 				console.log(err);
+				navigate("/Login");
 			});
-			setLoading(false)
-	}, []);
+		setLoading(false);
+	}, [navigate]);
 
 	const toggleNotification = () => {
 		setIsActive(!isActive);
@@ -67,28 +70,20 @@ function Home() {
 		setLoading(true)
 
 		try {
-			const uploadData = {
+			const response = await axiosInstance.post('/addPartcodeForUser', {
 				partyCode,
-			};
-			const response = await fetch(`${process.env.REACT_APP_API_URL}/addPartcodeForUser`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(uploadData),
 			});
+			
 
-			if (response.ok) {
+			if (response.status === 200) {
 				toast.success("PartyCode added Successfully");
-			} else {
-				toast.error("Error adding PartyCode");
+				window.location.reload();
 			}
 		} catch (error) {
 			console.error('Error Adding PartyCode', error.message);
-			toast("Error adding PartyCode. Please try again.");
+			toast.error("Error adding PartyCode. Please try again.");
 		}
 		setLoading(false)
-		window.location.reload();
 	}
 
 	return (

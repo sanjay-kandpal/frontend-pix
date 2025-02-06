@@ -11,6 +11,7 @@ import Error404 from './component/Error404';
 import { UserProvider } from './context/UserContext';
 import Album from "./component/Album";
 import Share from "./component/Share";
+import ProtectedRoute from "./component/ProtectedRoute";
 
 function App() {
 
@@ -21,13 +22,33 @@ function App() {
 				<Routes>
 					<Route path="/Login" element={<Login />} />
 					<Route path="/signup" element={<Signup />} />
-					<Route path="/" element={<Home />} />
-					<Route path="/home" element={<LandingPage />} />
-					<Route path="/Upload" element={<HandleFileUpload />} />
-					<Route path="/selfImageUpload" element={<SelfieUpload />} />
-					<Route path="/profile" element={<Profile />} />
-					<Route path="/album/:partycode" element={<Album />} />
-					<Route path="/share" element={<Share />} />
+					
+					<Route path="/" element={<LandingPage />} />
+					
+					<Route path="/home" element={
+						<ProtectedRoute>
+							<Home />
+						</ProtectedRoute>} />
+					<Route path="/Upload" element={
+						<ProtectedRoute>
+							<HandleFileUpload />
+						</ProtectedRoute>} />
+					<Route path="/selfImageUpload" element={
+						<ProtectedRoute>
+							<SelfieUpload />
+						</ProtectedRoute>} />
+					<Route path="/profile" element={
+						<ProtectedRoute>
+							<Profile />
+						</ProtectedRoute>} />
+					<Route path="/album/:partycode" element={
+						<ProtectedRoute>
+							<Album />
+						</ProtectedRoute>} />
+					<Route path="/share" element={
+						<ProtectedRoute>
+							<Share />
+						</ProtectedRoute>} />
 					<Route path="/*" element={<Error404 />} />
 				</Routes>
 			</UserProvider>

@@ -10,6 +10,7 @@ import axios from "axios";
 import logo from "../images/logo.png";
 import { toast } from "react-toastify";
 import { useUserData } from '../context/UserContext';
+import axiosInstance from '../utils/axios';
 
 function Login() {
 	const [values, setValues] = useState({
@@ -33,48 +34,40 @@ function Login() {
 	};
 
 	useEffect(() => {
-		axios
-			.get(`${process.env.REACT_APP_API_URL}`)
+		const token = localStorage.getItem('token');
+		if (token) {
+		  axiosInstance.get('/')
 			.then((res) => {
-				console.log(res);
-				
-				if (res.data.valid === true) {
-					toast.success('Login Successfully')
-					
-					navigate("/");
-				} else {
-					navigate("/Login");
-				}
+			  if (res.data.valid) {
+				navigate("/");
+			  }
 			})
-			.catch((err) => {
-				console.log(err);
+			.catch(() => {
+			  localStorage.removeItem('token');
+			  localStorage.removeItem('id');
 			});
-	}, []);
+		}
+	}, [navigate]);
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		setErrors(Validation(values));
 		if (errors.email === "" && errors.password === "") {
-			axios
-				.post(`${process.env.REACT_APP_API_URL}/login`, values)
-				.then((res) => {
-					console.log(res.data);
-					if (res.data.message === true) {
-						toast.success('Login Successfully')
-						setUserData(res.data)
-						localStorage.setItem('id',res.data.id);
-						// localStorage.setItem('profile', res.data.name);
-                    // localStorage.setItem('email',res.data.email)
-					// localStorage.setItem('password', res.data.password);
-						navigate("/");
-					} else {
-						toast.error('Login Failed ')
-					}
-				})
-				.catch((err) => {
-					console.log(err);
-					toast.error(err)
-				});
+			try {
+			  const response =  await axiosInstance.post('/login', values);
+			  if (response.data.message) {
+				localStorage.setItem('token', response.data.token);
+				localStorage.setItem('id', response.data.id);
+				setUserData(response.data);
+				toast.success('Login Successfully');
+				navigate("/");
+			  }else {
+                	toast.error('Invalid credentials');
+            	}
+			} catch (err) {
+				console.error('Login error:', err);
+			  toast.error(err.response?.data?.message || 'Login Failed');
+			}
 		}
 	};
 

@@ -16,31 +16,13 @@ const Sidebar = () => {
     const [isAuthenticated, setAuthentic] = useState(false);
     const navigate = useNavigate();
 
-    const handleExit = async () => {
-        console.log("Logout");
-        try {
-            console.log(process.env.REACT_APP_API_URL);
-            
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/signout`, {
-                method: "POST",
-                credentials: "include", // Include cookies in the request
-            });
-            console.log(response);
-            if (response.ok) {
-                // Handle successful sign-out (redirect, etc.)s
-                localStorage.removeItem('id');
-                toast.success('LOGOUT Successfully')
-                setAuthentic(false);
-                Cookies.remove('connect.sid')       
-                navigate("/login");
-            } else {
-                // Handle sign-out failure
-                console.error("Sign-out failed:", response.statusText);
-            }
-        } catch (error) {
-            console.error("Sign-out error:", error.message);
-        }
-    };
+    const handleExit = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
+        setAuthentic(false);
+        toast.success('Logout Successfully');
+        navigate("/login");
+      };
 
     return (
         <div className="menu">
