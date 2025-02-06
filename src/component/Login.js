@@ -60,7 +60,7 @@ function Login() {
 				localStorage.setItem('id', response.data.id);
 				setUserData(response.data);
 				toast.success('Login Successfully');
-				navigate("/");
+				navigate("/home");
 			  }else {
                 	toast.error('Invalid credentials');
             	}
